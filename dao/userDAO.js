@@ -53,6 +53,7 @@ module.exports = class AplicationsDAO {
 
             let query = { email: { $eq: email } }
             let cursor = await users.findOne(query)
+            return cursor
         } catch (e) {
             console.error(`error trying to login: ${e}`);
             return { error: e }
