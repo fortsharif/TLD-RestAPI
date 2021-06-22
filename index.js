@@ -1,7 +1,7 @@
 const app = require('./server.js')
 const mongodb = require('mongodb')
 const dotenv = require('dotenv')
-
+const UserDAO = require('./dao/userDAO')
 const ApplicationsDAO = require('./dao/applicationsDAO')
 
 dotenv.config()
@@ -22,6 +22,7 @@ MongoClient.connect(process.env.TLD_DB_URI,
     })
     .then(async client => {
         await ApplicationsDAO.injectDB(client)
+        await UserDAO.injectDB(client)
         app.listen(port, () => {
             console.log(`Listening on port ${port}`);
         })
