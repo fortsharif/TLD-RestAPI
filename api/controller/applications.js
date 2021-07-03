@@ -26,7 +26,7 @@ module.exports = class ApplicationsController {
             current_item: currentCursor,
             total_results: numberOfApplications
         }
-        res.json(response)
+        res.status(200).json(response)
     }
 
     static async addApplication(req, res, next) {
@@ -46,6 +46,6 @@ module.exports = class ApplicationsController {
             occupation,
             date
         )
-        res.json({ status: "success" })
+        res.status(200).json({ status: "success" })
     }
 }

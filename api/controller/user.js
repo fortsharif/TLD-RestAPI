@@ -17,7 +17,7 @@ module.exports = class UserController {
             }
             await UserDAO.register(email, hash)
         })
-        return res.json({ status: "success" })
+        return res.status(200).json({ status: "success" })
     }
 
     static async login(req, res, next) {
