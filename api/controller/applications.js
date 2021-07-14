@@ -2,8 +2,8 @@ const ApplicationsDAO = require('../../dao/applicationsDAO')
 
 module.exports = class ApplicationsController {
     static async getApplications(req, res, next) {
-        const applicationsPerPage = parseInt(req.query.applicationsPerPage, 10)
-        const page = parseInt(req.query.page, 10)
+        const applicationsPerPage = req.query.applicationsPerPage ? parseInt(req.query.applicationsPerPage, 10) : 10
+        const page = req.query.page ? parseInt(req.query.page, 10) : 0
 
         let filters = {}
         if (req.query.name) {

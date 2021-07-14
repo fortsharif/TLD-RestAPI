@@ -36,7 +36,7 @@ module.exports = class UserController {
                     {
                         expiresIn: "10h"
                     })
-                res.json({ status: "success", token: token })
+                res.status(200).json({ status: "success", token: token })
             }
             else if (!result) {
                 return res.status(500).json({ error: `Auth failed` })
