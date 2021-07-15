@@ -23,7 +23,7 @@ module.exports = class ApplicationsController {
             page: page,
             filters: filters,
             entries_per_page: applicationsPerPage,
-            current_item: currentCursor,
+            current_item: currentCursor + applicationsPerPage,
             total_results: numberOfApplications
         }
         res.status(200).json(response)
