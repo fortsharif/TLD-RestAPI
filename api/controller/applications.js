@@ -4,7 +4,7 @@ module.exports = class ApplicationsController {
     static async getApplications(req, res, next) {
         const applicationsPerPage = req.query.applicationsPerPage ? parseInt(req.query.applicationsPerPage, 10) : 10
         const page = req.query.page ? parseInt(req.query.page, 10) : 0
-
+        console.log(req.userData)
         let filters = {}
         if (req.query.name) {
             filters.name = req.query.name
@@ -33,7 +33,7 @@ module.exports = class ApplicationsController {
         const address = req.body.address
         const user = {
             name: req.body.name,
-            _id: req.body.user_id
+            _id: req.userData.email
         }
         const occupation = req.body.occupation
         const number = req.body.number

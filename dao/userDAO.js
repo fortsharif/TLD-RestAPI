@@ -47,12 +47,13 @@ module.exports = class AplicationsDAO {
         }
     }
 
-    static async login(email, password) {
+    static async login(email) {
         try {
 
 
             let query = { email: { $eq: email } }
             let cursor = await users.findOne(query)
+            console.log(cursor)
             return cursor
         } catch (e) {
             console.error(`error trying to login: ${e}`);
