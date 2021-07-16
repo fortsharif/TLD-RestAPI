@@ -69,7 +69,7 @@ module.exports = class ApplicationsController {
                 if (err) {
                     console.log('Error Occurs', err)
                 } else {
-                    console.log('Email sent!!!')
+                    console.log('Success email has been sent')
                 }
             })
 
