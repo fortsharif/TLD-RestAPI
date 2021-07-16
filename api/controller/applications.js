@@ -1,4 +1,5 @@
 const ApplicationsDAO = require('../../dao/applicationsDAO')
+const nodemailer = require('nodemailer')
 
 module.exports = class ApplicationsController {
     static async getApplications(req, res, next) {
@@ -46,7 +47,32 @@ module.exports = class ApplicationsController {
             occupation,
             date
         )
+
+
         if (added) {
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: "huseinsharif.96@gmail.com",
+                    pass: process.env.PASSWORD
+                }
+            })
+
+            const mailOptions = {
+                from: "huseinsharif.96@gmail.com",
+                to: "huseinsharif.96@gmail.com",
+                subject: 'NEW APPLICATION',
+                text: `New application details \n name: ${user.name} \n address: ${address} \n number: ${number} \n occupation: ${occupation} `
+            }
+
+            transporter.sendMail(mailOptions, (err, data) => {
+                if (err) {
+                    console.log('Error Occurs', err)
+                } else {
+                    console.log('Email sent!!!')
+                }
+            })
+
             res.status(200).json({ status: "success" })
         }
         else {
