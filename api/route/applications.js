@@ -8,6 +8,8 @@ const router = express.Router()
 
 router.get("/", adminauth, ApplicationsController.getApplications)
 
+router.get("/status", auth, ApplicationsController.getApplication)
+
 router.post("/", auth, ApplicationsController.addApplication)
 
 module.exports = router

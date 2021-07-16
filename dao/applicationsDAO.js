@@ -52,10 +52,22 @@ module.exports = class AplicationsDAO {
     static async addApplication(user, address, number, occupation, date) {
         try {
             const applicationDoc = { name: user.name, user_id: user._id, date: date, address: address, number: number, occupation: occupation, status: "new" }
-            return await applications.insertOne(applicationDoc)
+            await applications.insertOne(applicationDoc)
+            return true
         } catch (e) {
             console.error(`Unable to add application ${e}`)
-            return { error: e }
+            return false
+        }
+    }
+
+    static async getApplication(email) {
+        try {
+            let query = { user_id: { $eq: email } }
+            let cursor = await applications.findOne(query)
+            console.log(cursor)
+            return cursor
+        } catch (e) {
+            console.error(`no applications ${e}`)
         }
     }
 }

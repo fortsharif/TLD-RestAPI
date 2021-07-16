@@ -39,13 +39,32 @@ module.exports = class ApplicationsController {
         const number = req.body.number
         const date = new Date()
 
-        await ApplicationsDAO.addApplication(
+        const added = await ApplicationsDAO.addApplication(
             user,
             address,
             number,
             occupation,
             date
         )
-        res.status(200).json({ status: "success" })
+        if (added) {
+            res.status(200).json({ status: "success" })
+        }
+        else {
+            res.status(400).json({ error: "couldn't add application" })
+        }
+    }
+
+    static async getApplication(req, res, next) {
+        const emailCheck = req.userData.email
+        console.log(emailCheck)
+        const application = await ApplicationsDAO.getApplication(emailCheck)
+
+        if (application.user_id == emailCheck) {
+            res.status(200).json(application)
+        }
+        else {
+            res.status(401).json({ error: "Unauthorized access to application" })
+        }
+
     }
 }
