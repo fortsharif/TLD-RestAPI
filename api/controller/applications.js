@@ -1,5 +1,6 @@
 const ApplicationsDAO = require('../../dao/applicationsDAO')
 const nodemailer = require('nodemailer')
+const multer = require('multer')
 
 module.exports = class ApplicationsController {
     static async getApplications(req, res, next) {
@@ -32,12 +33,14 @@ module.exports = class ApplicationsController {
 
     static async addApplication(req, res, next) {
         const address = req.body.address
+        console.log(req.file)
         const user = {
             name: req.body.name,
             _id: req.userData.email
         }
         const occupation = req.body.occupation
         const number = req.body.number
+        const image = req.file.path
         const date = new Date()
 
         const added = await ApplicationsDAO.addApplication(
@@ -45,7 +48,8 @@ module.exports = class ApplicationsController {
             address,
             number,
             occupation,
-            date
+            date,
+            image
         )
 
 

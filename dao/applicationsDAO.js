@@ -49,9 +49,9 @@ module.exports = class AplicationsDAO {
         }
     }
 
-    static async addApplication(user, address, number, occupation, date) {
+    static async addApplication(user, address, number, occupation, date, image) {
         try {
-            const applicationDoc = { name: user.name, user_id: user._id, date: date, address: address, number: number, occupation: occupation, status: "new" }
+            const applicationDoc = { name: user.name, user_id: user._id, date: date, address: address, number: number, occupation: occupation, image, status: "new" }
             await applications.insertOne(applicationDoc)
             return true
         } catch (e) {
