@@ -22,7 +22,7 @@ const router = express.Router()
 
 router.get("/", adminauth, ApplicationsController.getApplications)
 
-router.post("/update", adminauth, ApplicationsController.updateApplication)
+router.put("/update", adminauth, ApplicationsController.updateApplication)
 
 router.get("/status", auth, ApplicationsController.getApplication)
 
