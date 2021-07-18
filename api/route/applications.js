@@ -22,6 +22,8 @@ const router = express.Router()
 
 router.get("/", adminauth, ApplicationsController.getApplications)
 
+router.post("/update", adminauth, ApplicationsController.updateApplication)
+
 router.get("/status", auth, ApplicationsController.getApplication)
 
 router.post("/", [auth, upload.single('image')], ApplicationsController.addApplication)

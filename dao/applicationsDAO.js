@@ -25,6 +25,8 @@ module.exports = class AplicationsDAO {
                 query = { "number": { $eq: filters["number"] } }
             } else if ("occupation" in filters) {
                 query = { "occupation": { $eq: filters["occupation"] } }
+            } else if ("status" in filters) {
+                query = { "status": { $eq: filters["status"] } }
             }
         }
 
@@ -46,6 +48,23 @@ module.exports = class AplicationsDAO {
             console.error(`problem counting documents or converting to array: ${e}`)
             return { applicationsList: [], numberOfApplications: 0, currentCursor: 0 }
 
+        }
+    }
+
+    static async updateApplication(email, status) {
+        try {
+            let filter = { user_id: email }
+            console.log(status)
+            let update = { status: status }
+            const options = { returnNewDocument: true }
+            const nn = await applications.findOneAndUpdate(filter, { $set: update }, options)
+            console.log(nn)
+
+            return true
+
+        } catch (e) {
+            console.error(`Unable to update application ${e}`)
+            return false
         }
     }
 

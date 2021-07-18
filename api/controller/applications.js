@@ -4,7 +4,7 @@ const multer = require('multer')
 
 module.exports = class ApplicationsController {
     static async getApplications(req, res, next) {
-        const applicationsPerPage = req.query.applicationsPerPage ? parseInt(req.query.applicationsPerPage, 10) : 10
+        const applicationsPerPage = req.query.applicationsPerPage ? parseInt(req.query.applicationsPerPage, 8) : 8
         const page = req.query.page ? parseInt(req.query.page, 10) : 0
         console.log(req.userData)
         let filters = {}
@@ -16,6 +16,8 @@ module.exports = class ApplicationsController {
             filters.occupation = req.query.occupation
         } else if (req.query.number) {
             filters.number = req.query.number
+        } else if (req.query.status) {
+            filters.status = req.query.status
         }
 
         const { applicationsList, numberOfApplications, currentCursor } = await ApplicationsDAO.getApplications({ filters, page, applicationsPerPage })
@@ -29,6 +31,20 @@ module.exports = class ApplicationsController {
             total_results: numberOfApplications
         }
         res.status(200).json(response)
+    }
+
+    static async updateApplication(req, res, next) {
+        const email = req.body.email
+        const status = req.body.status
+        const updated = await ApplicationsDAO.updateApplication(email, status)
+
+        if (updated) {
+            res.status(200).json({ status: "success" })
+        } else {
+
+            res.status(401).json({ error: "couldn't update application" })
+
+        }
     }
 
     static async addApplication(req, res, next) {
