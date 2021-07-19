@@ -1,5 +1,5 @@
 const { ObjectId } = require("mongodb")
-
+//some referrences to https://www.youtube.com/watch?v=Oe421EPjeBE
 let applications
 
 module.exports = class AplicationsDAO {
