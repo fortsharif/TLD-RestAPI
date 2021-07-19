@@ -13,9 +13,7 @@ const actualUserBody = {
     "password": "e"
 }
 
-
-
-describe("Put request to appplications", function () {
+/* describe("Put request to appplications", function () {
     describe("when not logged in", function () {
         it("status should return success", function () {
             app.get('/api/v1/user/applications').end((err, res) => {
@@ -34,7 +32,7 @@ describe("Put request to appplications", function () {
             })
         })
     })
-})
+}) */
 
 describe("Get request to appplications", function () {
     describe("when not logged in", function () {

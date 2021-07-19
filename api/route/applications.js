@@ -88,7 +88,7 @@ router.get("/", adminauth, ApplicationsController.getApplications)
  *       properties:
  *        email:
  *         type: string
- *        password:
+ *        status:
  *         type: string
  *   responses:
  *    200:

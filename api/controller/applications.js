@@ -1,6 +1,9 @@
 const ApplicationsDAO = require('../../dao/applicationsDAO')
 const nodemailer = require('nodemailer')
 const multer = require('multer')
+//some referrences to https://www.youtube.com/watch?v=Oe421EPjeBE
+
+
 
 module.exports = class ApplicationsController {
     static async getApplications(req, res, next) {
