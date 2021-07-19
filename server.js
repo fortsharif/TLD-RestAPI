@@ -7,6 +7,7 @@ const adminauth = require('./api/middleware/adminauth')
 const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUI = require('swagger-ui-express')
 
+
 const swaggerOptions = {
     definition: {
         openapi: "3.0.0",
@@ -23,6 +24,7 @@ const openapiSpecification = swaggerJsDoc(swaggerOptions)
 console.log(openapiSpecification)
 
 const app = express()
+
 
 app.use(cors())
 app.use(express.json())

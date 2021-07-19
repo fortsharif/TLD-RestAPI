@@ -8,22 +8,31 @@ dotenv.config()
 
 const MongoClient = mongodb.MongoClient
 
-const port = process.env.PORT || 8000
+const port = process.env.PORT
 
-MongoClient.connect(process.env.TLD_DB_URI,
-    {
-        poolSize: 20,
-        wtimeout: 5000,
-        useNewUrlParser: true
-    })
-    .catch(err => {
-        console.error(err)
-        process.exit(1)
-    })
-    .then(async client => {
-        await ApplicationsDAO.injectDB(client)
-        await UserDAO.injectDB(client)
-        app.listen(port, () => {
-            console.log(`Listening on port ${port}`);
+
+const connect = () => {
+    MongoClient.connect(process.env.TLD_DB_URI,
+        {
+            poolSize: 20,
+            wtimeout: 5000,
+            useNewUrlParser: true
         })
-    })
+        .catch(err => {
+            console.error(err)
+            process.exit(1)
+        })
+        .then(async client => {
+            await ApplicationsDAO.injectDB(client)
+            await UserDAO.injectDB(client)
+            app.listen(port, () => {
+                console.log(`Listening on port ${port}`);
+            })
+        })
+}
+
+connect()
+
+
+
+module.exports = app
