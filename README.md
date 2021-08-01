@@ -1,6 +1,6 @@
 # Trading License Department API
 
-Trading License Department API is an API for ....... Trading Licenses
+Trading License Department API is a REST API for ....... Trading Licenses
 
 ## Installation
 
